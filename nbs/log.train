@@ -1,24 +1,0 @@
-Loss function:  cross_entropy_mixup
-█epoch     train_loss  valid_loss  accuracy  lrap      time    
-██0         3.829473    3.039525    0.114537  0.271024  01:02     
-█1         853.213379  00:48       
-Loss function:  cross_entropy_mixup
-█epoch     train_loss  valid_loss  accuracy  lrap      time    
-█0         nan         00:15       
-Loss function:  cross_entropy_mixup
-█epoch     train_loss  valid_loss  accuracy  lrap      time    
-█0         nan         00:15       
-Loss function:  cross_entropy_mixup
-█epoch     train_loss  valid_loss  accuracy  lrap      time    
-█0         nan         00:15       
-Loss function:  cross_entropy_mixup
-█epoch     train_loss  valid_loss  accuracy  lrap      time    
-█0         nan         00:15       
-Loss function:  cross_entropy_mixup
-█epoch     train_loss  valid_loss  accuracy  lrap      time    
-█0         nan         00:15       
-Loss function:  cross_entropy_mixup
-█epoch     train_loss  valid_loss  accuracy  lrap      time    
-██0         3.829473    3.039525    0.114537  0.271024  01:03     
-██1         3.591484    2.664272    0.237885  0.397219  00:59     
-█2         3.493998    00:31       

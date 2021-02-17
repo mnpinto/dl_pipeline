@@ -1,6 +1,7 @@
 nbs/data
 nbs/models
 nbs/preds
+nbs/log.*
 *.bak
 .gitattributes
 .last_checked
