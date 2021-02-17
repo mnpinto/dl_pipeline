@@ -47,7 +47,7 @@ nb_path: "nbs/01audio_util.ipynb"
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="mask2category" class="doc_header"><code>mask2category</code><a href="https://github.com/mnpinto/dl_pipeline/tree/master/dl_pipeline/audio/util.py#L17" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>mask2category</code>(<strong><code>x</code></strong>, <strong><code>y</code></strong>)</p>
+<h4 id="mask2category" class="doc_header"><code>mask2category</code><a href="https://github.com/mnpinto/dl_pipeline/tree/master/dl_pipeline/audio/util.py#L20" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>mask2category</code>(<strong><code>x</code></strong>, <strong><code>y</code></strong>)</p>
 </blockquote>
 
 </div>
@@ -71,8 +71,9 @@ nb_path: "nbs/01audio_util.ipynb"
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="cross_entropy" class="doc_header"><code>cross_entropy</code><a href="https://github.com/mnpinto/dl_pipeline/tree/master/dl_pipeline/audio/util.py#L21" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>cross_entropy</code>(<strong><code>x</code></strong>, <strong><code>y</code></strong>, <strong><code>before</code></strong>=<em><code>mask2category</code></em>, <strong><code>after</code></strong>=<em><code>&lt;lambda&gt;</code></em>)</p>
+<h4 id="accuracy" class="doc_header"><code>accuracy</code><a href="https://github.com/fastai/fastai/tree/master/fastai/metrics.py#L99" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>accuracy</code>(<strong><code>inp</code></strong>, <strong><code>targ</code></strong>, <strong><code>axis</code></strong>=<em><code>-1</code></em>)</p>
 </blockquote>
+<p>Compute accuracy with <code>targ</code> when <code>pred</code> is bs * n_classes</p>
 
 </div>
 
@@ -95,31 +96,7 @@ nb_path: "nbs/01audio_util.ipynb"
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="accuracy" class="doc_header"><code>accuracy</code><a href="https://github.com/mnpinto/dl_pipeline/tree/master/dl_pipeline/audio/util.py#L28" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>accuracy</code>(<strong><code>x</code></strong>, <strong><code>y</code></strong>, <strong><code>before</code></strong>=<em><code>mask2category</code></em>, <strong><code>after</code></strong>=<em><code>&lt;lambda&gt;</code></em>)</p>
-</blockquote>
-
-</div>
-
-</div>
-
-</div>
-</div>
-
-</div>
-    {% endraw %}
-
-    {% raw %}
-    
-<div class="cell border-box-sizing code_cell rendered">
-
-<div class="output_wrapper">
-<div class="output">
-
-<div class="output_area">
-
-
-<div class="output_markdown rendered_html output_subarea ">
-<h4 id="lrap" class="doc_header"><code>lrap</code><a href="https://github.com/mnpinto/dl_pipeline/tree/master/dl_pipeline/audio/util.py#L32" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>lrap</code>(<strong><code>x</code></strong>, <strong><code>y</code></strong>, <strong><code>before</code></strong>=<em><code>mask2category</code></em>, <strong><code>after</code></strong>=<em><code>&lt;lambda&gt;</code></em>)</p>
+<h4 id="lrap" class="doc_header"><code>lrap</code><a href="https://github.com/mnpinto/dl_pipeline/tree/master/dl_pipeline/audio/util.py#L28" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>lrap</code>(<strong><code>x</code></strong>, <strong><code>y</code></strong>, <strong><code>before</code></strong>=<em><code>mask2category</code></em>, <strong><code>after</code></strong>=<em><code>&lt;lambda&gt;</code></em>)</p>
 </blockquote>
 
 </div>
@@ -150,7 +127,7 @@ nb_path: "nbs/01audio_util.ipynb"
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="kfold_dataframes" class="doc_header"><code>kfold_dataframes</code><a href="https://github.com/mnpinto/dl_pipeline/tree/master/dl_pipeline/audio/util.py#L39" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>kfold_dataframes</code>(<strong><code>df</code></strong>, <strong><code>fold_number</code></strong>, <strong><code>n_splits</code></strong>=<em><code>5</code></em>, <strong><code>shuffle</code></strong>=<em><code>True</code></em>, <strong><code>random_state</code></strong>=<em><code>2021</code></em>)</p>
+<h4 id="kfold_dataframes" class="doc_header"><code>kfold_dataframes</code><a href="https://github.com/mnpinto/dl_pipeline/tree/master/dl_pipeline/audio/util.py#L36" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>kfold_dataframes</code>(<strong><code>df</code></strong>, <strong><code>fold_number</code></strong>, <strong><code>n_splits</code></strong>=<em><code>5</code></em>, <strong><code>shuffle</code></strong>=<em><code>True</code></em>, <strong><code>random_state</code></strong>=<em><code>2021</code></em>)</p>
 </blockquote>
 
 </div>
@@ -193,8 +170,8 @@ nb_path: "nbs/01audio_util.ipynb"
 <div class="output_area">
 
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>CPU times: user 3.9 ms, sys: 0 ns, total: 3.9 ms
-Wall time: 3.69 ms
+<pre>CPU times: user 6.23 ms, sys: 0 ns, total: 6.23 ms
+Wall time: 6.01 ms
 </pre>
 </div>
 </div>
@@ -205,6 +182,131 @@ Wall time: 3.69 ms
 
 <div class="output_text output_subarea output_execute_result">
 <pre>(972, 244)</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+<div class="output_markdown rendered_html output_subarea ">
+<h2 id="OneHot" class="doc_header"><code>class</code> <code>OneHot</code><a href="https://github.com/mnpinto/dl_pipeline/tree/master/dl_pipeline/audio/util.py#L42" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>OneHot</code>(<strong><code>after_create</code></strong>=<em><code>None</code></em>, <strong><code>before_fit</code></strong>=<em><code>None</code></em>, <strong><code>before_epoch</code></strong>=<em><code>None</code></em>, <strong><code>before_train</code></strong>=<em><code>None</code></em>, <strong><code>before_batch</code></strong>=<em><code>None</code></em>, <strong><code>after_pred</code></strong>=<em><code>None</code></em>, <strong><code>after_loss</code></strong>=<em><code>None</code></em>, <strong><code>before_backward</code></strong>=<em><code>None</code></em>, <strong><code>after_backward</code></strong>=<em><code>None</code></em>, <strong><code>after_step</code></strong>=<em><code>None</code></em>, <strong><code>after_cancel_batch</code></strong>=<em><code>None</code></em>, <strong><code>after_batch</code></strong>=<em><code>None</code></em>, <strong><code>after_cancel_train</code></strong>=<em><code>None</code></em>, <strong><code>after_train</code></strong>=<em><code>None</code></em>, <strong><code>before_validate</code></strong>=<em><code>None</code></em>, <strong><code>after_cancel_validate</code></strong>=<em><code>None</code></em>, <strong><code>after_validate</code></strong>=<em><code>None</code></em>, <strong><code>after_cancel_epoch</code></strong>=<em><code>None</code></em>, <strong><code>after_epoch</code></strong>=<em><code>None</code></em>, <strong><code>after_cancel_fit</code></strong>=<em><code>None</code></em>, <strong><code>after_fit</code></strong>=<em><code>None</code></em>) :: <code>Callback</code></p>
+</blockquote>
+<p>Basic class handling tweaks of the training loop by changing a <code>Learner</code> in various events</p>
+
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+<div class="output_markdown rendered_html output_subarea ">
+<h2 id="MixUp" class="doc_header"><code>class</code> <code>MixUp</code><a href="https://github.com/fastai/fastai/tree/master/fastai/callback/mixup.py#L19" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>MixUp</code>(<strong><code>alpha</code></strong>=<em><code>0.4</code></em>) :: <code>Callback</code></p>
+</blockquote>
+<p>Basic class handling tweaks of the training loop by changing a <code>Learner</code> in various events</p>
+
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+<div class="output_markdown rendered_html output_subarea ">
+<h2 id="LabelSED" class="doc_header"><code>class</code> <code>LabelSED</code><a href="https://github.com/mnpinto/dl_pipeline/tree/master/dl_pipeline/audio/util.py#L72" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>LabelSED</code>(<strong><code>model_n_rescales</code></strong>) :: <code>Callback</code></p>
+</blockquote>
+<p>Basic class handling tweaks of the training loop by changing a <code>Learner</code> in various events</p>
+
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="o">%%time</span>
+<span class="n">MixUp</span><span class="p">(</span><span class="mf">0.4</span><span class="p">,</span> <span class="n">onehot</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>CPU times: user 214 µs, sys: 29 µs, total: 243 µs
+Wall time: 219 µs
+</pre>
+</div>
+</div>
+
+<div class="output_area">
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>MixUp</pre>
 </div>
 
 </div>

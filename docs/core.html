@@ -54,7 +54,7 @@ nb_path: "nbs/01audio_core.ipynb"
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h2 id="TensorAudio" class="doc_header"><code>class</code> <code>TensorAudio</code><a href="https://github.com/mnpinto/dl_pipeline/tree/master/dl_pipeline/audio/core.py#L17" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>TensorAudio</code>(<strong><code>x</code></strong>, <strong>**<code>kwargs</code></strong>) :: <code>TensorBase</code></p>
+<h2 id="TensorAudio" class="doc_header"><code>class</code> <code>TensorAudio</code><a href="https://github.com/mnpinto/dl_pipeline/tree/master/dl_pipeline/audio/core.py#L20" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>TensorAudio</code>(<strong><code>x</code></strong>, <strong>**<code>kwargs</code></strong>) :: <code>TensorBase</code></p>
 </blockquote>
 
 </div>
@@ -78,7 +78,7 @@ nb_path: "nbs/01audio_core.ipynb"
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h2 id="TensorAudioLabel" class="doc_header"><code>class</code> <code>TensorAudioLabel</code><a href="https://github.com/mnpinto/dl_pipeline/tree/master/dl_pipeline/audio/core.py#L18" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>TensorAudioLabel</code>(<strong><code>x</code></strong>, <strong>**<code>kwargs</code></strong>) :: <code>TensorBase</code></p>
+<h2 id="TensorAudioLabel" class="doc_header"><code>class</code> <code>TensorAudioLabel</code><a href="https://github.com/mnpinto/dl_pipeline/tree/master/dl_pipeline/audio/core.py#L21" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>TensorAudioLabel</code>(<strong><code>x</code></strong>, <strong>**<code>kwargs</code></strong>) :: <code>TensorBase</code></p>
 </blockquote>
 
 </div>
@@ -102,7 +102,7 @@ nb_path: "nbs/01audio_core.ipynb"
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="load_npy" class="doc_header"><code>load_npy</code><a href="https://github.com/mnpinto/dl_pipeline/tree/master/dl_pipeline/audio/core.py#L20" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>load_npy</code>(<strong><code>fn</code></strong>)</p>
+<h4 id="load_npy" class="doc_header"><code>load_npy</code><a href="https://github.com/mnpinto/dl_pipeline/tree/master/dl_pipeline/audio/core.py#L23" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>load_npy</code>(<strong><code>fn</code></strong>)</p>
 </blockquote>
 
 </div>
@@ -126,7 +126,7 @@ nb_path: "nbs/01audio_core.ipynb"
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="sample_file" class="doc_header"><code>sample_file</code><a href="https://github.com/mnpinto/dl_pipeline/tree/master/dl_pipeline/audio/core.py#L23" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>sample_file</code>()</p>
+<h4 id="sample_file" class="doc_header"><code>sample_file</code><a href="https://github.com/mnpinto/dl_pipeline/tree/master/dl_pipeline/audio/core.py#L26" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>sample_file</code>()</p>
 </blockquote>
 
 </div>
@@ -167,8 +167,8 @@ nb_path: "nbs/01audio_core.ipynb"
 <div class="output_area">
 
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>CPU times: user 15 ms, sys: 3.78 ms, total: 18.8 ms
-Wall time: 17.8 ms
+<pre>CPU times: user 19.5 ms, sys: 0 ns, total: 19.5 ms
+Wall time: 19.8 ms
 </pre>
 </div>
 </div>
@@ -178,7 +178,7 @@ Wall time: 17.8 ms
 
 
 <div class="output_text output_subarea output_execute_result">
-<pre>[&lt;matplotlib.lines.Line2D at 0x7f8ff32905e0&gt;]</pre>
+<pre>[&lt;matplotlib.lines.Line2D at 0x7f329ae146a0&gt;]</pre>
 </div>
 
 </div>
@@ -212,7 +212,7 @@ Wall time: 17.8 ms
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="melspectrogram" class="doc_header"><code>melspectrogram</code><a href="https://github.com/mnpinto/dl_pipeline/tree/master/dl_pipeline/audio/core.py#L27" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>melspectrogram</code>(<strong><code>wav</code></strong>, <strong><code>sample_rate</code></strong>=<em><code>22050</code></em>, <strong><code>n_fft</code></strong>=<em><code>2048</code></em>, <strong><code>n_mels</code></strong>=<em><code>128</code></em>, <strong><code>hop_length</code></strong>=<em><code>512</code></em>, <strong><code>window</code></strong>=<em><code>'hann'</code></em>, <strong><code>center</code></strong>=<em><code>True</code></em>, <strong><code>pad_mode</code></strong>=<em><code>'reflect'</code></em>, <strong><code>power</code></strong>=<em><code>2.0</code></em>, <strong><code>htk</code></strong>=<em><code>False</code></em>, <strong><code>fmin</code></strong>=<em><code>0.0</code></em>, <strong><code>fmax</code></strong>=<em><code>None</code></em>, <strong><code>norm</code></strong>=<em><code>1</code></em>, <strong><code>trainable_mel</code></strong>=<em><code>False</code></em>, <strong><code>trainable_STFT</code></strong>=<em><code>False</code></em>, <strong><code>verbose</code></strong>=<em><code>False</code></em>, <strong><code>eps</code></strong>=<em><code>1e-06</code></em>, <strong><code>cuda</code></strong>=<em><code>False</code></em>, <strong><code>log</code></strong>=<em><code>True</code></em>, <strong>**<code>kwargs</code></strong>)</p>
+<h4 id="melspectrogram" class="doc_header"><code>melspectrogram</code><a href="https://github.com/mnpinto/dl_pipeline/tree/master/dl_pipeline/audio/core.py#L30" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>melspectrogram</code>(<strong><code>wav</code></strong>, <strong><code>sample_rate</code></strong>=<em><code>22050</code></em>, <strong><code>n_fft</code></strong>=<em><code>2048</code></em>, <strong><code>n_mels</code></strong>=<em><code>128</code></em>, <strong><code>hop_length</code></strong>=<em><code>512</code></em>, <strong><code>window</code></strong>=<em><code>'hann'</code></em>, <strong><code>center</code></strong>=<em><code>True</code></em>, <strong><code>pad_mode</code></strong>=<em><code>'reflect'</code></em>, <strong><code>power</code></strong>=<em><code>2.0</code></em>, <strong><code>htk</code></strong>=<em><code>False</code></em>, <strong><code>fmin</code></strong>=<em><code>0.0</code></em>, <strong><code>fmax</code></strong>=<em><code>None</code></em>, <strong><code>norm</code></strong>=<em><code>1</code></em>, <strong><code>trainable_mel</code></strong>=<em><code>False</code></em>, <strong><code>trainable_STFT</code></strong>=<em><code>False</code></em>, <strong><code>verbose</code></strong>=<em><code>False</code></em>, <strong><code>eps</code></strong>=<em><code>1e-06</code></em>, <strong><code>cuda</code></strong>=<em><code>False</code></em>, <strong><code>log</code></strong>=<em><code>True</code></em>, <strong>**<code>kwargs</code></strong>)</p>
 </blockquote>
 
 </div>
@@ -236,7 +236,7 @@ Wall time: 17.8 ms
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="show_sample" class="doc_header"><code>show_sample</code><a href="https://github.com/mnpinto/dl_pipeline/tree/master/dl_pipeline/audio/core.py#L38" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>show_sample</code>(<strong><code>file</code></strong>=<em><code>'/kaggle/kaggle_rainforest_audio/data/npy32000/train/000316da7.npy'</code></em>, <strong><code>tfms</code></strong>=<em><code>&lt;lambda&gt;</code></em>, <strong><code>sample_rate</code></strong>=<em><code>48000</code></em>, <strong><code>hop_length</code></strong>=<em><code>512</code></em>, <strong><code>width</code></strong>=<em><code>512</code></em>, <strong><code>figsize</code></strong>=<em><code>(10, 4)</code></em>, <strong><code>vmin</code></strong>=<em><code>-10</code></em>, <strong><code>vmax</code></strong>=<em><code>2</code></em>)</p>
+<h4 id="show_sample" class="doc_header"><code>show_sample</code><a href="https://github.com/mnpinto/dl_pipeline/tree/master/dl_pipeline/audio/core.py#L41" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>show_sample</code>(<strong><code>file</code></strong>=<em><code>'/kaggle/kaggle_rainforest_audio/data/npy32000/train/000316da7.npy'</code></em>, <strong><code>tfms</code></strong>=<em><code>&lt;lambda&gt;</code></em>, <strong><code>sample_rate</code></strong>=<em><code>48000</code></em>, <strong><code>hop_length</code></strong>=<em><code>512</code></em>, <strong><code>width</code></strong>=<em><code>512</code></em>, <strong><code>figsize</code></strong>=<em><code>(10, 4)</code></em>, <strong><code>vmin</code></strong>=<em><code>-10</code></em>, <strong><code>vmax</code></strong>=<em><code>2</code></em>)</p>
 </blockquote>
 
 </div>
@@ -289,8 +289,8 @@ Wall time: 17.8 ms
 <div class="output_area">
 
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>CPU times: user 571 ms, sys: 1.7 ms, total: 572 ms
-Wall time: 368 ms
+<pre>CPU times: user 642 ms, sys: 40.4 ms, total: 683 ms
+Wall time: 410 ms
 </pre>
 </div>
 </div>
@@ -301,6 +301,67 @@ Wall time: 368 ms
 </div>
     {% endraw %}
 
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Saving-audio-data-in-npy-files">Saving audio data in npy files<a class="anchor-link" href="#Saving-audio-data-in-npy-files"> </a></h3>
+</div>
+</div>
+</div>
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+<div class="output_markdown rendered_html output_subarea ">
+<h4 id="audio2npy" class="doc_header"><code>audio2npy</code><a href="https://github.com/mnpinto/dl_pipeline/tree/master/dl_pipeline/audio/core.py#L50" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>audio2npy</code>(<strong><code>file</code></strong>, <strong><code>path_save</code></strong>, <strong><code>sample_rate</code></strong>=<em><code>32000</code></em>)</p>
+</blockquote>
+
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+
+</div>
+    {% endraw %}
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<div class="highlight"><pre><span></span><span class="n">sample_rate</span> <span class="o">=</span> <span class="mi">32_000</span>
+<span class="n">path</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="s1">&#39;/kaggle/kaggle_rainforest_audio/data&#39;</span><span class="p">)</span>
+<span class="n">train_path</span> <span class="o">=</span> <span class="n">path</span><span class="o">/</span><span class="s1">&#39;train&#39;</span>
+<span class="n">test_path</span> <span class="o">=</span> <span class="n">path</span><span class="o">/</span><span class="s1">&#39;test&#39;</span>
+<span class="n">train_path_npy</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="n">path</span><span class="o">/</span><span class="sa">f</span><span class="s1">&#39;npy</span><span class="si">{</span><span class="n">sample_rate</span><span class="si">}</span><span class="s1">/train&#39;</span><span class="p">)</span>
+<span class="n">test_path_npy</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="n">path</span><span class="o">/</span><span class="sa">f</span><span class="s1">&#39;npy</span><span class="si">{</span><span class="n">sample_rate</span><span class="si">}</span><span class="s1">/test&#39;</span><span class="p">)</span>
+
+<span class="n">files</span> <span class="o">=</span> <span class="n">train_path</span><span class="o">.</span><span class="n">ls</span><span class="p">()</span>
+<span class="n">files</span> <span class="o">=</span> <span class="p">[</span><span class="n">f</span> <span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="n">files</span> <span class="k">if</span> <span class="s1">&#39;.flac&#39;</span> <span class="ow">in</span> <span class="n">f</span><span class="o">.</span><span class="n">suffix</span><span class="p">]</span>
+
+<span class="n">f</span> <span class="o">=</span> <span class="n">partial</span><span class="p">(</span><span class="n">audio2npy</span><span class="p">,</span> <span class="n">path_save</span><span class="o">=</span><span class="n">train_path_npy</span><span class="p">,</span> <span class="n">sample_rate</span><span class="o">=</span><span class="n">sample_rate</span><span class="p">)</span>
+<span class="n">parallel</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">files</span><span class="p">)</span>
+
+<span class="n">files</span> <span class="o">=</span> <span class="n">test_path</span><span class="o">.</span><span class="n">ls</span><span class="p">()</span>
+<span class="n">files</span> <span class="o">=</span> <span class="p">[</span><span class="n">f</span> <span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="n">files</span> <span class="k">if</span> <span class="s1">&#39;.flac&#39;</span> <span class="ow">in</span> <span class="n">f</span><span class="o">.</span><span class="n">suffix</span><span class="p">]</span>
+<span class="n">f</span> <span class="o">=</span> <span class="n">partial</span><span class="p">(</span><span class="n">audio2npy</span><span class="p">,</span> <span class="n">path_save</span><span class="o">=</span><span class="n">test_path_npy</span><span class="p">,</span> <span class="n">sample_rate</span><span class="o">=</span><span class="n">sample_rate</span><span class="p">)</span>
+<span class="n">parallel</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">files</span><span class="p">)</span>
+</pre></div>
+
+</div>
+</div>
+</div>
 </div>
  
 

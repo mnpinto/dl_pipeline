@@ -39,63 +39,227 @@ nb_path: "nbs/kaggle_rfcx-species-audio-detection.ipynb"
     {% raw %}
     
 <div class="cell border-box-sizing code_cell rendered">
-<div class="input">
 
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="nd">@call_parse</span>
-<span class="k">def</span> <span class="nf">main</span><span class="p">(</span><span class="n">fold</span><span class="p">:</span><span class="n">Param</span><span class="p">(</span><span class="s1">&#39;Fold number&#39;</span><span class="p">,</span> <span class="nb">int</span><span class="p">)</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> 
-         <span class="n">n_epochs</span><span class="p">:</span><span class="n">Param</span><span class="p">(</span><span class="s1">&#39;Number of training epochs&#39;</span><span class="p">,</span> <span class="nb">int</span><span class="p">)</span><span class="o">=</span><span class="mi">40</span><span class="p">,</span>
-         <span class="n">lr</span><span class="p">:</span><span class="n">Param</span><span class="p">(</span><span class="s1">&#39;Learning rate&#39;</span><span class="p">,</span> <span class="nb">float</span><span class="p">)</span><span class="o">=</span><span class="mf">1e-3</span><span class="p">,</span>
-         <span class="n">wd</span><span class="p">:</span><span class="n">Param</span><span class="p">(</span><span class="s1">&#39;Weight decay&#39;</span><span class="p">,</span> <span class="nb">float</span><span class="p">)</span><span class="o">=</span><span class="mf">3e-2</span><span class="p">,</span>
-         <span class="n">tile_width</span><span class="p">:</span><span class="n">Param</span><span class="p">(</span><span class="s1">&#39;Tile width&#39;</span><span class="p">,</span> <span class="nb">int</span><span class="p">)</span><span class="o">=</span><span class="mi">256</span><span class="p">,</span>
-         <span class="n">bs</span><span class="p">:</span><span class="n">Param</span><span class="p">(</span><span class="s1">&#39;Batch size&#39;</span><span class="p">,</span> <span class="nb">int</span><span class="p">)</span><span class="o">=</span><span class="mi">128</span><span class="p">,</span>
-         <span class="n">aug_ps</span><span class="p">:</span><span class="n">Param</span><span class="p">(</span><span class="s1">&#39;Augmentation probability&#39;</span><span class="p">,</span> <span class="nb">float</span><span class="p">)</span><span class="o">=</span><span class="mf">0.25</span><span class="p">,</span>
-         <span class="n">plot</span><span class="p">:</span><span class="n">Param</span><span class="p">(</span><span class="s1">&#39;Do plot of a sample of data&#39;</span><span class="p">,</span> <span class="nb">bool</span><span class="p">)</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
-    <span class="n">sample_rate</span> <span class="o">=</span> <span class="mi">32000</span>
-    <span class="n">num_classes</span> <span class="o">=</span> <span class="mi">24</span>
-    <span class="n">seed_everything</span><span class="p">()</span>
+<div class="output_wrapper">
+<div class="output">
 
-    <span class="n">path</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="s1">&#39;/kaggle/kaggle_rainforest_audio/data&#39;</span><span class="p">)</span>
-    <span class="n">rename_cols</span> <span class="o">=</span> <span class="n">RenameColumns</span><span class="p">(</span><span class="nb">id</span><span class="o">=</span><span class="s1">&#39;recording_id&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;species_id&#39;</span><span class="p">,</span> <span class="n">tmin</span><span class="o">=</span><span class="s1">&#39;t_min&#39;</span><span class="p">,</span> 
-                                <span class="n">tmax</span><span class="o">=</span><span class="s1">&#39;t_max&#39;</span><span class="p">,</span><span class="n">fmin</span><span class="o">=</span><span class="s1">&#39;f_min&#39;</span><span class="p">,</span> <span class="n">fmax</span><span class="o">=</span><span class="s1">&#39;f_max&#39;</span><span class="p">)</span>
-    <span class="n">df</span> <span class="o">=</span> <span class="n">Pipeline</span><span class="p">([</span><span class="n">load_dataframe</span><span class="p">,</span> <span class="n">rename_cols</span><span class="p">,</span> <span class="n">group_labels</span><span class="p">])(</span><span class="n">path</span><span class="o">/</span><span class="s1">&#39;train_tp.csv&#39;</span><span class="p">)</span>
-    <span class="n">train_df</span><span class="p">,</span> <span class="n">valid_df</span> <span class="o">=</span> <span class="n">kfold_dataframes</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">fold</span><span class="p">)</span>
+<div class="output_area">
 
-    <span class="n">tfms</span> <span class="o">=</span> <span class="n">partial</span><span class="p">(</span><span class="n">apply_augmentations</span><span class="p">,</span> 
-                   <span class="n">augs_pipeline</span><span class="o">=</span><span class="n">audio_augment</span><span class="p">(</span><span class="n">sample_rate</span><span class="p">,</span> <span class="n">p</span><span class="o">=</span><span class="n">aug_ps</span><span class="p">,</span> <span class="n">time_mask</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> 
-                                               <span class="n">freq_mask</span><span class="o">=</span><span class="kc">False</span><span class="p">))</span>
 
-    <span class="n">train_data</span> <span class="o">=</span> <span class="n">Datasets</span><span class="p">(</span><span class="n">items</span><span class="o">=</span><span class="n">train_df</span><span class="p">,</span> <span class="n">tfms</span><span class="o">=</span><span class="n">partial</span><span class="p">(</span><span class="n">create_dataset_item</span><span class="p">,</span> <span class="n">path</span><span class="o">=</span><span class="n">path</span><span class="p">,</span>
-                                               <span class="n">sample_rate</span><span class="o">=</span><span class="n">sample_rate</span><span class="p">,</span> <span class="n">tile_width</span><span class="o">=</span><span class="n">tile_width</span><span class="p">))</span>
-    <span class="n">valid_data</span> <span class="o">=</span> <span class="n">Datasets</span><span class="p">(</span><span class="n">items</span><span class="o">=</span><span class="n">valid_df</span><span class="p">,</span> <span class="n">tfms</span><span class="o">=</span><span class="n">partial</span><span class="p">(</span><span class="n">create_dataset_item</span><span class="p">,</span> <span class="n">path</span><span class="o">=</span><span class="n">path</span><span class="p">,</span>
-                                               <span class="n">sample_rate</span><span class="o">=</span><span class="n">sample_rate</span><span class="p">,</span> <span class="n">tile_width</span><span class="o">=</span><span class="n">tile_width</span><span class="p">))</span>
-    <span class="n">train_dl</span> <span class="o">=</span> <span class="n">DataLoader</span><span class="p">(</span><span class="n">train_data</span><span class="p">,</span> <span class="n">bs</span><span class="o">=</span><span class="n">bs</span><span class="p">,</span> <span class="n">do_batch</span><span class="o">=</span><span class="n">reorganize_batch</span><span class="p">,</span> <span class="n">shuffle</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">num_workers</span><span class="o">=</span><span class="mi">8</span><span class="p">,</span>
-                          <span class="n">after_item</span><span class="o">=</span><span class="n">tfms</span><span class="p">,</span> <span class="n">after_batch</span><span class="o">=</span><span class="n">MelSpectrogram</span><span class="p">(</span><span class="n">sample_rate</span><span class="p">))</span>
-    <span class="n">valid_dl</span> <span class="o">=</span> <span class="n">DataLoader</span><span class="p">(</span><span class="n">valid_data</span><span class="p">,</span> <span class="n">bs</span><span class="o">=</span><span class="n">bs</span><span class="p">,</span> <span class="n">do_batch</span><span class="o">=</span><span class="n">reorganize_batch</span><span class="p">,</span> <span class="n">num_workers</span><span class="o">=</span><span class="mi">8</span><span class="p">,</span>
-                          <span class="n">after_batch</span><span class="o">=</span><span class="n">MelSpectrogram</span><span class="p">(</span><span class="n">sample_rate</span><span class="p">))</span>
-    <span class="n">dls</span> <span class="o">=</span> <span class="n">DataLoaders</span><span class="p">(</span><span class="n">train_dl</span><span class="p">,</span> <span class="n">valid_dl</span><span class="p">)</span>
+<div class="output_markdown rendered_html output_subarea ">
+<h4 id="audio_augment" class="doc_header"><code>audio_augment</code><a href="https://github.com/mnpinto/dl_pipeline/tree/master/dl_pipeline/audio/dataset.py#L160" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>audio_augment</code>(<strong><code>sample_rate</code></strong>, <strong><code>p</code></strong>=<em><code>0.5</code></em>, <strong><code>gaussianSNR</code></strong>=<em><code>True</code></em>, <strong><code>gain</code></strong>=<em><code>True</code></em>, <strong><code>clipping</code></strong>=<em><code>True</code></em>, <strong><code>pitchshift</code></strong>=<em><code>True</code></em>, <strong><code>timestretch</code></strong>=<em><code>True</code></em>, <strong><code>freq_mask</code></strong>=<em><code>True</code></em>, <strong><code>time_mask</code></strong>=<em><code>True</code></em>, <strong><code>shift</code></strong>=<em><code>True</code></em>, <strong><code>extra_augs</code></strong>=<em><code>[]</code></em>, <strong>**<code>kwargs</code></strong>)</p>
+</blockquote>
 
-    <span class="n">xb</span><span class="p">,</span> <span class="n">yb</span> <span class="o">=</span> <span class="n">dls</span><span class="o">.</span><span class="n">one_batch</span><span class="p">()</span>
+</div>
 
-    <span class="k">if</span> <span class="n">plot</span><span class="p">:</span> <span class="n">show_augmentations</span><span class="p">(</span><span class="n">train_data</span><span class="p">,</span> <span class="n">train_dl</span><span class="p">,</span> <span class="n">sample_rate</span><span class="o">=</span><span class="n">sample_rate</span><span class="p">)</span>
+</div>
 
-    <span class="n">model</span> <span class="o">=</span> <span class="n">ResNeSt50</span><span class="p">(</span><span class="n">num_classes</span><span class="o">=</span><span class="n">num_classes</span><span class="p">)</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">torch</span><span class="o">.</span><span class="n">device</span><span class="p">(</span><span class="s2">&quot;cuda:0&quot;</span><span class="p">))</span>
-    <span class="n">dls</span><span class="o">.</span><span class="n">device</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">device</span><span class="p">(</span><span class="s2">&quot;cuda:0&quot;</span><span class="p">)</span>
-
-    <span class="n">learn</span> <span class="o">=</span> <span class="n">Learner</span><span class="p">(</span><span class="n">dls</span><span class="p">,</span> <span class="n">model</span><span class="p">,</span> <span class="n">loss_func</span><span class="o">=</span><span class="n">cross_entropy</span><span class="p">,</span> <span class="n">metrics</span><span class="o">=</span><span class="p">[</span><span class="n">accuracy</span><span class="p">,</span> <span class="n">lrap</span><span class="p">])</span>
-    <span class="n">learn</span><span class="o">.</span><span class="n">to_fp16</span><span class="p">(</span><span class="n">clip</span><span class="o">=</span><span class="mf">0.5</span><span class="p">);</span>
-
-    <span class="n">learn</span><span class="o">.</span><span class="n">fit_one_cycle</span><span class="p">(</span><span class="n">n_epochs</span><span class="p">,</span> <span class="n">lr</span><span class="p">,</span> <span class="n">wd</span><span class="o">=</span><span class="n">wd</span><span class="p">,</span> <span class="n">div_final</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">div</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
-</pre></div>
-
-    </div>
 </div>
 </div>
 
 </div>
     {% endraw %}
 
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+<div class="output_markdown rendered_html output_subarea ">
+<h4 id="train" class="doc_header"><code>train</code><a href="https://github.com/mnpinto/dl_pipeline/tree/master/dl_pipeline/kaggle/rfcx_species_audio_detection.py#L34" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>train</code>(<strong><code>sample_rate</code></strong>, <strong><code>num_classes</code></strong>, <strong><code>fold</code></strong>, <strong><code>n_epochs</code></strong>, <strong><code>lr</code></strong>, <strong><code>wd</code></strong>, <strong><code>tile_width</code></strong>, <strong><code>bs</code></strong>, <strong><code>aug_ps</code></strong>, <strong><code>model_name</code></strong>, <strong><code>loss_func</code></strong>, <strong><code>plot</code></strong>, <strong><code>load_checkpoint</code></strong>=<em><code>None</code></em>, <strong><code>lr_find</code></strong>=<em><code>False</code></em>, <strong><code>head_ps</code></strong>=<em><code>0.8</code></em>, <strong><code>mixup</code></strong>=<em><code>False</code></em>, <strong><code>n_mels</code></strong>=<em><code>128</code></em>, <strong><code>hop_length</code></strong>=<em><code>512</code></em>, <strong><code>model</code></strong>=<em><code>'resnest50'</code></em>)</p>
+</blockquote>
+
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+<div class="output_markdown rendered_html output_subarea ">
+<h4 id="get_preds" class="doc_header"><code>get_preds</code><a href="https://github.com/mnpinto/dl_pipeline/tree/master/dl_pipeline/kaggle/rfcx_species_audio_detection.py#L102" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>get_preds</code>(<strong><code>dataloader</code></strong>, <strong><code>model</code></strong>, <strong><code>device</code></strong>=<em><code>device(type='cuda', index=0)</code></em>, <strong><code>max_reduce</code></strong>=<em><code>True</code></em>)</p>
+</blockquote>
+
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+<div class="output_markdown rendered_html output_subarea ">
+<h4 id="test" class="doc_header"><code>test</code><a href="https://github.com/fastai/fastcore/tree/master/fastcore/test.py#L22" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>test</code>(<strong><code>a</code></strong>, <strong><code>b</code></strong>, <strong><code>cmp</code></strong>, <strong><code>cname</code></strong>=<em><code>None</code></em>)</p>
+</blockquote>
+<p><code>assert</code> that <code>cmp(a,b)</code>; display inputs and <code>cname or cmp.__name__</code> if it fails</p>
+
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+<div class="output_markdown rendered_html output_subarea ">
+<h4 id="main" class="doc_header"><code>main</code><a href="https://github.com/mnpinto/dl_pipeline/tree/master/dl_pipeline/kaggle/rfcx_species_audio_detection.py#L187" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>main</code>(<strong><code>fold</code></strong>:"Fold number"=<em><code>0</code></em>, <strong><code>n_epochs</code></strong>:"Number of training epochs"=<em><code>30</code></em>, <strong><code>lr</code></strong>:"Learning rate"=<em><code>0.001</code></em>, <strong><code>wd</code></strong>:"Weight decay"=<em><code>0.03</code></em>, <strong><code>loss_func</code></strong>:"Loss function"=<em><code>'cross_entropy'</code></em>, <strong><code>tile_width</code></strong>:"Tile width"=<em><code>1024</code></em>, <strong><code>sample_rate</code></strong>:"Sample rate"=<em><code>32000</code></em>, <strong><code>n_mels</code></strong>:"Spectrogram n_mels"=<em><code>128</code></em>, <strong><code>hop_length</code></strong>:"Spectrogram hop_length"=<em><code>640</code></em>, <strong><code>bs</code></strong>:"Batch size"=<em><code>32</code></em>, <strong><code>accumulate_gradients</code></strong>:"Batch size for gradient accumulation"=<em><code>None</code></em>, <strong><code>aug_ps</code></strong>:"Augmentation probability"=<em><code>0.25</code></em>, <strong><code>model</code></strong>:"Name of model architecture"=<em><code>'densenet121'</code></em>, <strong><code>model_name</code></strong>:"Name of parameters file"=<em><code>'model_n0'</code></em>, <strong><code>ens_folds</code></strong>:"Folds to use for ensemble"=<em><code>[0, 1, 2, 3, 4]</code></em>, <strong><code>run_test</code></strong>:"Run test prediction (default is train)"=<em><code>False</code></em>, <strong><code>load_checkpoint</code></strong>:"Load model checkpoint before new train loop"=<em><code>None</code></em>, <strong><code>head_ps</code></strong>:"Model head dropout probability"=<em><code>0.8</code></em>, <strong><code>mixup</code></strong>:"Use mixup"=<em><code>True</code></em>, <strong><code>save_preds</code></strong>:"Save model predictions for train and validation"=<em><code>False</code></em>)</p>
+</blockquote>
+
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+
+</div>
+    {% endraw %}
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Train-model">Train model<a class="anchor-link" href="#Train-model"> </a></h3><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">]:</span>
+    <span class="n">train</span><span class="p">(</span>
+        <span class="n">sample_rate</span><span class="o">=</span><span class="mi">32000</span><span class="p">,</span>
+        <span class="n">num_classes</span><span class="o">=</span><span class="mi">24</span><span class="p">,</span>
+        <span class="n">fold</span><span class="o">=</span><span class="n">i</span><span class="p">,</span>
+        <span class="n">n_epochs</span><span class="o">=</span><span class="mi">30</span><span class="p">,</span>
+        <span class="n">lr</span><span class="o">=</span><span class="mf">1e-3</span><span class="p">,</span>
+        <span class="n">wd</span><span class="o">=</span><span class="mf">3e-2</span><span class="p">,</span>
+        <span class="n">n_mels</span><span class="o">=</span><span class="mi">128</span><span class="p">,</span>
+        <span class="n">hop_length</span><span class="o">=</span><span class="mi">640</span><span class="p">,</span>
+        <span class="n">tile_width</span><span class="o">=</span><span class="mi">1024</span><span class="p">,</span>
+        <span class="n">bs</span><span class="o">=</span><span class="mi">32</span><span class="p">,</span>
+        <span class="n">aug_ps</span><span class="o">=</span><span class="mf">0.25</span><span class="p">,</span>
+        <span class="n">model</span><span class="o">=</span><span class="s1">&#39;densenet121&#39;</span><span class="p">,</span>
+        <span class="n">model_name</span><span class="o">=</span><span class="s1">&#39;model_n68&#39;</span><span class="p">,</span>
+        <span class="n">loss_func</span><span class="o">=</span><span class="s1">&#39;cross_entropy&#39;</span><span class="p">,</span> 
+        <span class="n">plot</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>  
+        <span class="n">load_checkpoint</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> 
+        <span class="n">lr_find</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> 
+        <span class="n">head_ps</span><span class="o">=</span><span class="mf">0.8</span><span class="p">,</span>
+        <span class="n">mixup</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Generate-predictions">Generate predictions<a class="anchor-link" href="#Generate-predictions"> </a></h3><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">w</span> <span class="ow">in</span> <span class="p">[</span><span class="mi">64</span><span class="p">,</span> <span class="mi">128</span><span class="p">,</span> <span class="mi">256</span><span class="p">]:</span>
+    <span class="n">test</span><span class="p">(</span><span class="n">sample_rate</span><span class="o">=</span><span class="mi">32000</span><span class="p">,</span> 
+         <span class="n">num_classes</span><span class="o">=</span><span class="mi">24</span><span class="p">,</span> 
+         <span class="n">n_mels</span><span class="o">=</span><span class="mi">128</span><span class="p">,</span>
+         <span class="n">hop_length</span><span class="o">=</span><span class="mi">640</span><span class="p">,</span>
+         <span class="n">tile_width</span><span class="o">=</span><span class="n">w</span><span class="p">,</span> 
+         <span class="n">model</span><span class="o">=</span><span class="s1">&#39;densenet121&#39;</span><span class="p">,</span>
+         <span class="n">model_name</span><span class="o">=</span><span class="s1">&#39;model_n68&#39;</span><span class="p">,</span> 
+         <span class="n">ens_folds</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">],</span>
+         <span class="n">save_preds</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Running-on-terminal">Running on terminal<a class="anchor-link" href="#Running-on-terminal"> </a></h3><div class="highlight"><pre><span></span><span class="ch">#!/bin/bash</span>
+<span class="nv">arch</span><span class="o">=</span><span class="s1">&#39;densenet121&#39;</span>
+<span class="nv">model_name</span><span class="o">=</span><span class="s1">&#39;model_n100&#39;</span>
+<span class="nv">sample_rate</span><span class="o">=</span><span class="m">32000</span>
+<span class="nv">n_mels</span><span class="o">=</span><span class="m">128</span>
+<span class="nv">hop_length</span><span class="o">=</span><span class="m">640</span>
+<span class="k">for</span> fold in <span class="m">0</span> <span class="m">1</span> <span class="m">2</span> <span class="m">3</span> <span class="m">4</span>
+<span class="k">do</span>
+    <span class="nb">echo</span> <span class="s2">&quot;Training </span><span class="nv">$model</span><span class="s2"> for fold </span><span class="nv">$fold</span><span class="s2">&quot;</span>
+    kaggle_rainforest2021 --fold <span class="nv">$fold</span> --model_name <span class="nv">$model_name</span> --model <span class="nv">$arch</span> <span class="se">\</span>
+                          --sample_rate <span class="nv">$sample_rate</span> --n_mels <span class="nv">$n_mels</span> <span class="se">\</span>
+                          --hop_length <span class="nv">$hop_length</span> --bs <span class="m">32</span> --head_ps <span class="m">0</span>.8 <span class="se">\</span>
+                          --tile_width <span class="m">1024</span> --mixup <span class="nb">true</span> &gt;&gt; log.train
+<span class="k">done</span>
+
+<span class="k">for</span> tw in <span class="m">64</span> <span class="m">128</span> <span class="m">256</span>
+<span class="k">do</span>
+    <span class="nb">echo</span> <span class="s2">&quot;Generate predictions for </span><span class="nv">$model</span><span class="s2"> with tile_width of </span><span class="nv">$tw</span><span class="s2">&quot;</span>
+    kaggle_rainforest2021 --run_test <span class="nb">true</span> --model_name <span class="nv">$model_name</span> --model <span class="nv">$arch</span> <span class="se">\</span>
+                          --sample_rate <span class="nv">$sample_rate</span> --n_mels <span class="nv">$n_mels</span> <span class="se">\</span>
+                          --hop_length <span class="nv">$hop_length</span> --tile_width <span class="nv">$tw</span> <span class="se">\</span>
+                          --save_preds <span class="nb">true</span> &gt;&gt; log.predict
+<span class="k">done</span>
+</pre></div>
+
+</div>
+</div>
+</div>
 </div>
  
 

@@ -13,14 +13,20 @@ entries:
       title: Audio Core
       url: core.html
     - output: web,pdf
+      title: Vision Losses
+      url: losses.html
+    - output: web,pdf
+      title: Models
+      url: models.html
+    - output: web,pdf
+      title: Triplet Learning
+      url: triplet.html
+    - output: web,pdf
       title: Audio Augmentations
       url: augmentations.html
     - output: web,pdf
       title: Audio Datasets
       url: dataset.html
-    - output: web,pdf
-      title: Audio Models
-      url: models.html
     - output: web,pdf
       title: 'Audio Utility Functions '
       url: util.html
