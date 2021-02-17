@@ -1,3 +1,6 @@
+nbs/data
+nbs/models
+nbs/preds
 *.bak
 .gitattributes
 .last_checked

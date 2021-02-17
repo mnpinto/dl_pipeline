@@ -7,24 +7,27 @@ entries:
 - folders:
   - folderitems:
     - output: web,pdf
-      title: Export to modules
-      url: /export.html
+      title: Overview
+      url: /
     - output: web,pdf
-      title: Convert to html
-      url: /export2html.html
+      title: Audio Core
+      url: core.html
     - output: web,pdf
-      title: Show doc
-      url: /showdoc.html
+      title: Audio Augmentations
+      url: augmentations.html
     - output: web,pdf
-      title: Test functions
-      url: /test.html
+      title: Audio Datasets
+      url: dataset.html
     - output: web,pdf
-      title: Core functions
-      url: /core.html
+      title: Audio Models
+      url: models.html
     - output: web,pdf
-      title: Command line functions
-      url: /cli.html
+      title: 'Audio Utility Functions '
+      url: util.html
+    - output: web,pdf
+      title: Kaggle rfcx-species-audio-detection competition
+      url: kaggle_rfcx-species-audio-detection.html
     output: web
-    title: Notebook
+    title: dl_pipeline
   output: web
   title: Sidebar

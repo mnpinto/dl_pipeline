@@ -1,10 +1,11 @@
 {
-  "Notebook": {
-    "Export to modules": "/export",
-    "Convert to html": "/export2html",
-    "Show doc": "/showdoc",
-    "Test functions": "/test",
-    "Core functions": "/core",
-    "Command line functions": "/cli"
+  "dl_pipeline": {
+    "Overview": "/",
+    "Audio Core": "core.html",
+    "Audio Augmentations": "augmentations.html",
+    "Audio Datasets": "dataset.html",
+    "Audio Models": "models.html",
+    "Audio Utility Functions ": "util.html",
+    "Kaggle rfcx-species-audio-detection competition": "kaggle_rfcx-species-audio-detection.html"
   }
 }
