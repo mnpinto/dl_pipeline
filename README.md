@@ -15,7 +15,7 @@ cd dl_pipeline
 pip install -e .
 ```
 
-### Rainforest Connection Species Audio Detection
+## Rainforest Connection Species Audio Detection
 
 ```bash
 #!/bin/bash
