@@ -49,6 +49,6 @@ def show_sample(file=sample_file(), tfms=lambda x : x, sample_rate=48_000, hop_l
 # Cell
 def audio2npy(file, path_save, sample_rate=32_000):
     path_save.mkdir(exist_ok=True, parents=True)
-    path_save.mkdir(exist_ok=True, parents=True)
-    wave, _ = librosa.load(file, sr=sample_rate)
-    np.save(path_save/f'{file.stem}.npy', wave)
+    if not (path_save/f'{file.stem}.npy').is_file():
+        wave, _ = librosa.load(file, sr=sample_rate)
+        np.save(path_save/f'{file.stem}.npy', wave)

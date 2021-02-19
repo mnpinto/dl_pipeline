@@ -36,6 +36,90 @@ nb_path: "nbs/kaggle_rfcx-species-audio-detection.ipynb"
 </div>
     {% endraw %}
 
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Resample-and-save-waveform-data-in-npy-files">Resample and save waveform data in npy files<a class="anchor-link" href="#Resample-and-save-waveform-data-in-npy-files"> </a></h3>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>The following code will read the input flac files using librosa, resample to 32000 Hz and save as npy files. This will save time for loading the data during training and inference. If the files already exist in the path_save_npy, they will be ignored.</p>
+
+</div>
+</div>
+</div>
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">sample_rate</span> <span class="o">=</span> <span class="mi">32_000</span>
+<span class="n">path</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="s1">&#39;/kaggle/kaggle_rainforest_audio/data&#39;</span><span class="p">)</span>
+<span class="n">train_path</span> <span class="o">=</span> <span class="n">path</span><span class="o">/</span><span class="s1">&#39;train&#39;</span>
+<span class="n">test_path</span> <span class="o">=</span> <span class="n">path</span><span class="o">/</span><span class="s1">&#39;test&#39;</span>
+<span class="n">path_save_npy</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="n">path</span><span class="o">/</span><span class="sa">f</span><span class="s1">&#39;npy</span><span class="si">{</span><span class="n">sample_rate</span><span class="si">}</span><span class="s1">/train&#39;</span><span class="p">)</span>
+
+<span class="n">files</span> <span class="o">=</span> <span class="n">train_path</span><span class="o">.</span><span class="n">ls</span><span class="p">()</span>
+<span class="n">files</span> <span class="o">=</span> <span class="p">[</span><span class="n">f</span> <span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="n">files</span> <span class="k">if</span> <span class="s1">&#39;.flac&#39;</span> <span class="ow">in</span> <span class="n">f</span><span class="o">.</span><span class="n">suffix</span><span class="p">]</span>
+<span class="n">f</span> <span class="o">=</span> <span class="n">partial</span><span class="p">(</span><span class="n">audio2npy</span><span class="p">,</span> <span class="n">path_save</span><span class="o">=</span><span class="n">path_save_npy</span><span class="p">,</span> <span class="n">sample_rate</span><span class="o">=</span><span class="n">sample_rate</span><span class="p">)</span>
+<span class="n">parallel</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">files</span><span class="p">)</span>
+
+<span class="n">files</span> <span class="o">=</span> <span class="n">test_path</span><span class="o">.</span><span class="n">ls</span><span class="p">()</span>
+<span class="n">files</span> <span class="o">=</span> <span class="p">[</span><span class="n">f</span> <span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="n">files</span> <span class="k">if</span> <span class="s1">&#39;.flac&#39;</span> <span class="ow">in</span> <span class="n">f</span><span class="o">.</span><span class="n">suffix</span><span class="p">]</span>
+<span class="n">f</span> <span class="o">=</span> <span class="n">partial</span><span class="p">(</span><span class="n">audio2npy</span><span class="p">,</span> <span class="n">path_save</span><span class="o">=</span><span class="n">path_save_npy</span><span class="p">,</span> <span class="n">sample_rate</span><span class="o">=</span><span class="n">sample_rate</span><span class="p">)</span>
+<span class="n">parallel</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">files</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+<div class="output_html rendered_html output_subarea ">
+
+</div>
+
+</div>
+
+<div class="output_area">
+
+
+<div class="output_html rendered_html output_subarea ">
+
+</div>
+
+</div>
+
+<div class="output_area">
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>(#1992) [None,None,None,None,None,None,None,None,None,None...]</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Define-agumentation-Pipeline">Define agumentation Pipeline<a class="anchor-link" href="#Define-agumentation-Pipeline"> </a></h3>
+</div>
+</div>
+</div>
     {% raw %}
     
 <div class="cell border-box-sizing code_cell rendered">
@@ -67,6 +151,12 @@ nb_path: "nbs/kaggle_rfcx-species-audio-detection.ipynb"
 </div>
     {% endraw %}
 
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Define-train-setup">Define train setup<a class="anchor-link" href="#Define-train-setup"> </a></h3>
+</div>
+</div>
+</div>
     {% raw %}
     
 <div class="cell border-box-sizing code_cell rendered">
@@ -78,7 +168,7 @@ nb_path: "nbs/kaggle_rfcx-species-audio-detection.ipynb"
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="train" class="doc_header"><code>train</code><a href="https://github.com/mnpinto/dl_pipeline/tree/master/dl_pipeline/kaggle/rfcx_species_audio_detection.py#L34" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>train</code>(<strong><code>sample_rate</code></strong>, <strong><code>num_classes</code></strong>, <strong><code>fold</code></strong>, <strong><code>n_epochs</code></strong>, <strong><code>lr</code></strong>, <strong><code>wd</code></strong>, <strong><code>tile_width</code></strong>, <strong><code>bs</code></strong>, <strong><code>aug_ps</code></strong>, <strong><code>model_name</code></strong>, <strong><code>loss_func</code></strong>, <strong><code>plot</code></strong>, <strong><code>load_checkpoint</code></strong>=<em><code>None</code></em>, <strong><code>lr_find</code></strong>=<em><code>False</code></em>, <strong><code>head_ps</code></strong>=<em><code>0.8</code></em>, <strong><code>mixup</code></strong>=<em><code>False</code></em>, <strong><code>n_mels</code></strong>=<em><code>128</code></em>, <strong><code>hop_length</code></strong>=<em><code>512</code></em>, <strong><code>model</code></strong>=<em><code>'resnest50'</code></em>)</p>
+<h4 id="train" class="doc_header"><code>train</code><a href="https://github.com/mnpinto/dl_pipeline/tree/master/dl_pipeline/kaggle/rfcx_species_audio_detection.py#L34" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>train</code>(<strong><code>sample_rate</code></strong>, <strong><code>num_classes</code></strong>, <strong><code>fold</code></strong>, <strong><code>n_epochs</code></strong>, <strong><code>lr</code></strong>, <strong><code>wd</code></strong>, <strong><code>tile_width</code></strong>, <strong><code>bs</code></strong>, <strong><code>aug_ps</code></strong>, <strong><code>model_name</code></strong>, <strong><code>loss_func</code></strong>, <strong><code>plot</code></strong>, <strong><code>load_checkpoint</code></strong>=<em><code>None</code></em>, <strong><code>lr_find</code></strong>=<em><code>False</code></em>, <strong><code>head_ps</code></strong>=<em><code>0.8</code></em>, <strong><code>mixup</code></strong>=<em><code>False</code></em>, <strong><code>n_mels</code></strong>=<em><code>128</code></em>, <strong><code>hop_length</code></strong>=<em><code>512</code></em>, <strong><code>model_arch</code></strong>=<em><code>'resnest50'</code></em>)</p>
 </blockquote>
 
 </div>
@@ -98,6 +188,12 @@ nb_path: "nbs/kaggle_rfcx-species-audio-detection.ipynb"
 </div>
     {% endraw %}
 
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Define-inference-setup">Define inference setup<a class="anchor-link" href="#Define-inference-setup"> </a></h3>
+</div>
+</div>
+</div>
     {% raw %}
     
 <div class="cell border-box-sizing code_cell rendered">
@@ -109,7 +205,57 @@ nb_path: "nbs/kaggle_rfcx-species-audio-detection.ipynb"
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="get_preds" class="doc_header"><code>get_preds</code><a href="https://github.com/mnpinto/dl_pipeline/tree/master/dl_pipeline/kaggle/rfcx_species_audio_detection.py#L102" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>get_preds</code>(<strong><code>dataloader</code></strong>, <strong><code>model</code></strong>, <strong><code>device</code></strong>=<em><code>device(type='cuda', index=0)</code></em>, <strong><code>max_reduce</code></strong>=<em><code>True</code></em>)</p>
+<h4 id="post_processing" class="doc_header"><code>post_processing</code><a href="https://github.com/mnpinto/dl_pipeline/tree/master/dl_pipeline/kaggle/rfcx_species_audio_detection.py#L102" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>post_processing</code>(<strong><code>df</code></strong>, <strong><code>path_save</code></strong>, <strong><code>model_name</code></strong>, <strong><code>tile_width</code></strong>, <strong><code>MODE</code></strong>=<em><code>2</code></em>)</p>
+</blockquote>
+<p>Post processing idea by Chris Deotte shared at
+<a href="https://www.kaggle.com/c/rfcx-species-audio-detection/discussion/220389">https://www.kaggle.com/c/rfcx-species-audio-detection/discussion/220389</a></p>
+
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+<div class="output_markdown rendered_html output_subarea ">
+<h4 id="ensemble" class="doc_header"><code>ensemble</code><a href="https://github.com/mnpinto/dl_pipeline/tree/master/dl_pipeline/kaggle/rfcx_species_audio_detection.py#L135" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>ensemble</code>(<strong><code>files</code></strong>)</p>
+</blockquote>
+
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+<div class="output_markdown rendered_html output_subarea ">
+<h4 id="get_preds" class="doc_header"><code>get_preds</code><a href="https://github.com/mnpinto/dl_pipeline/tree/master/dl_pipeline/kaggle/rfcx_species_audio_detection.py#L143" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>get_preds</code>(<strong><code>dataloader</code></strong>, <strong><code>model</code></strong>, <strong><code>device</code></strong>=<em><code>device(type='cuda', index=0)</code></em>, <strong><code>max_reduce</code></strong>=<em><code>True</code></em>)</p>
 </blockquote>
 
 </div>
@@ -154,6 +300,12 @@ nb_path: "nbs/kaggle_rfcx-species-audio-detection.ipynb"
 </div>
     {% endraw %}
 
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Create-command-line-function">Create command line function<a class="anchor-link" href="#Create-command-line-function"> </a></h3>
+</div>
+</div>
+</div>
     {% raw %}
     
 <div class="cell border-box-sizing code_cell rendered">
@@ -165,7 +317,7 @@ nb_path: "nbs/kaggle_rfcx-species-audio-detection.ipynb"
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="main" class="doc_header"><code>main</code><a href="https://github.com/mnpinto/dl_pipeline/tree/master/dl_pipeline/kaggle/rfcx_species_audio_detection.py#L187" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>main</code>(<strong><code>fold</code></strong>:"Fold number"=<em><code>0</code></em>, <strong><code>n_epochs</code></strong>:"Number of training epochs"=<em><code>30</code></em>, <strong><code>lr</code></strong>:"Learning rate"=<em><code>0.001</code></em>, <strong><code>wd</code></strong>:"Weight decay"=<em><code>0.03</code></em>, <strong><code>loss_func</code></strong>:"Loss function"=<em><code>'cross_entropy'</code></em>, <strong><code>tile_width</code></strong>:"Tile width"=<em><code>1024</code></em>, <strong><code>sample_rate</code></strong>:"Sample rate"=<em><code>32000</code></em>, <strong><code>n_mels</code></strong>:"Spectrogram n_mels"=<em><code>128</code></em>, <strong><code>hop_length</code></strong>:"Spectrogram hop_length"=<em><code>640</code></em>, <strong><code>bs</code></strong>:"Batch size"=<em><code>32</code></em>, <strong><code>accumulate_gradients</code></strong>:"Batch size for gradient accumulation"=<em><code>None</code></em>, <strong><code>aug_ps</code></strong>:"Augmentation probability"=<em><code>0.25</code></em>, <strong><code>model</code></strong>:"Name of model architecture"=<em><code>'densenet121'</code></em>, <strong><code>model_name</code></strong>:"Name of parameters file"=<em><code>'model_n0'</code></em>, <strong><code>ens_folds</code></strong>:"Folds to use for ensemble"=<em><code>[0, 1, 2, 3, 4]</code></em>, <strong><code>run_test</code></strong>:"Run test prediction (default is train)"=<em><code>False</code></em>, <strong><code>load_checkpoint</code></strong>:"Load model checkpoint before new train loop"=<em><code>None</code></em>, <strong><code>head_ps</code></strong>:"Model head dropout probability"=<em><code>0.8</code></em>, <strong><code>mixup</code></strong>:"Use mixup"=<em><code>True</code></em>, <strong><code>save_preds</code></strong>:"Save model predictions for train and validation"=<em><code>False</code></em>)</p>
+<h4 id="main" class="doc_header"><code>main</code><a href="https://github.com/mnpinto/dl_pipeline/tree/master/dl_pipeline/kaggle/rfcx_species_audio_detection.py#L237" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>main</code>(<strong><code>fold</code></strong>:"Fold number"=<em><code>0</code></em>, <strong><code>n_epochs</code></strong>:"Number of training epochs"=<em><code>30</code></em>, <strong><code>lr</code></strong>:"Learning rate"=<em><code>0.001</code></em>, <strong><code>wd</code></strong>:"Weight decay"=<em><code>0.03</code></em>, <strong><code>loss_func</code></strong>:"Loss function"=<em><code>'cross_entropy'</code></em>, <strong><code>tile_width</code></strong>:"Tile width"=<em><code>1024</code></em>, <strong><code>tile_widths_inference</code></strong>:"List of tile widths for inference"=<em><code>[128, 256]</code></em>, <strong><code>sample_rate</code></strong>:"Sample rate"=<em><code>32000</code></em>, <strong><code>n_mels</code></strong>:"Spectrogram n_mels"=<em><code>128</code></em>, <strong><code>hop_length</code></strong>:"Spectrogram hop_length"=<em><code>640</code></em>, <strong><code>bs</code></strong>:"Batch size"=<em><code>32</code></em>, <strong><code>accumulate_gradients</code></strong>:"Batch size for gradient accumulation"=<em><code>None</code></em>, <strong><code>aug_ps</code></strong>:"Augmentation probability"=<em><code>0.25</code></em>, <strong><code>model_arch</code></strong>:"Name of model architecture"=<em><code>'densenet121'</code></em>, <strong><code>model_name</code></strong>:"Name of parameters file"=<em><code>'model_n0'</code></em>, <strong><code>ens_folds</code></strong>:"Folds to use for ensemble"=<em><code>[0, 1, 2, 3, 4]</code></em>, <strong><code>run_test</code></strong>:"Run test prediction (default is train)"=<em><code>False</code></em>, <strong><code>load_checkpoint</code></strong>:"Load model checkpoint before new train loop"=<em><code>None</code></em>, <strong><code>head_ps</code></strong>:"Model head dropout probability"=<em><code>0.8</code></em>, <strong><code>mixup</code></strong>:"Use mixup"=<em><code>True</code></em>, <strong><code>save_preds</code></strong>:"Save model predictions for train and validation"=<em><code>False</code></em>)</p>
 </blockquote>
 
 </div>
@@ -200,8 +352,8 @@ nb_path: "nbs/kaggle_rfcx-species-audio-detection.ipynb"
         <span class="n">tile_width</span><span class="o">=</span><span class="mi">1024</span><span class="p">,</span>
         <span class="n">bs</span><span class="o">=</span><span class="mi">32</span><span class="p">,</span>
         <span class="n">aug_ps</span><span class="o">=</span><span class="mf">0.25</span><span class="p">,</span>
-        <span class="n">model</span><span class="o">=</span><span class="s1">&#39;densenet121&#39;</span><span class="p">,</span>
-        <span class="n">model_name</span><span class="o">=</span><span class="s1">&#39;model_n68&#39;</span><span class="p">,</span>
+        <span class="n">model_arch</span><span class="o">=</span><span class="s1">&#39;resnest50&#39;</span><span class="p">,</span>
+        <span class="n">model_name</span><span class="o">=</span><span class="s1">&#39;model_n100&#39;</span><span class="p">,</span>
         <span class="n">loss_func</span><span class="o">=</span><span class="s1">&#39;cross_entropy&#39;</span><span class="p">,</span> 
         <span class="n">plot</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>  
         <span class="n">load_checkpoint</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> 
@@ -215,16 +367,15 @@ nb_path: "nbs/kaggle_rfcx-species-audio-detection.ipynb"
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Generate-predictions">Generate predictions<a class="anchor-link" href="#Generate-predictions"> </a></h3><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">w</span> <span class="ow">in</span> <span class="p">[</span><span class="mi">64</span><span class="p">,</span> <span class="mi">128</span><span class="p">,</span> <span class="mi">256</span><span class="p">]:</span>
-    <span class="n">test</span><span class="p">(</span><span class="n">sample_rate</span><span class="o">=</span><span class="mi">32000</span><span class="p">,</span> 
-         <span class="n">num_classes</span><span class="o">=</span><span class="mi">24</span><span class="p">,</span> 
-         <span class="n">n_mels</span><span class="o">=</span><span class="mi">128</span><span class="p">,</span>
-         <span class="n">hop_length</span><span class="o">=</span><span class="mi">640</span><span class="p">,</span>
-         <span class="n">tile_width</span><span class="o">=</span><span class="n">w</span><span class="p">,</span> 
-         <span class="n">model</span><span class="o">=</span><span class="s1">&#39;densenet121&#39;</span><span class="p">,</span>
-         <span class="n">model_name</span><span class="o">=</span><span class="s1">&#39;model_n68&#39;</span><span class="p">,</span> 
-         <span class="n">ens_folds</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">],</span>
-         <span class="n">save_preds</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<h3 id="Generate-predictions-for-test-data">Generate predictions for test data<a class="anchor-link" href="#Generate-predictions-for-test-data"> </a></h3><div class="highlight"><pre><span></span><span class="n">test</span><span class="p">(</span><span class="n">sample_rate</span><span class="o">=</span><span class="mi">32000</span><span class="p">,</span> 
+     <span class="n">num_classes</span><span class="o">=</span><span class="mi">24</span><span class="p">,</span> 
+     <span class="n">n_mels</span><span class="o">=</span><span class="mi">128</span><span class="p">,</span>
+     <span class="n">hop_length</span><span class="o">=</span><span class="mi">640</span><span class="p">,</span>
+     <span class="n">tile_width</span><span class="o">=</span><span class="p">[</span><span class="mi">128</span><span class="p">,</span><span class="mi">256</span><span class="p">],</span> 
+     <span class="n">model_arch</span><span class="o">=</span><span class="s1">&#39;resnest50&#39;</span><span class="p">,</span>
+     <span class="n">model_name</span><span class="o">=</span><span class="s1">&#39;model_n100&#39;</span><span class="p">,</span> 
+     <span class="n">ens_folds</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">],</span>
+     <span class="n">save_preds</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 </pre></div>
 
 </div>
@@ -232,8 +383,8 @@ nb_path: "nbs/kaggle_rfcx-species-audio-detection.ipynb"
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Running-on-terminal">Running on terminal<a class="anchor-link" href="#Running-on-terminal"> </a></h3><div class="highlight"><pre><span></span><span class="ch">#!/bin/bash</span>
-<span class="nv">arch</span><span class="o">=</span><span class="s1">&#39;densenet121&#39;</span>
+<h3 id="Running-train-and-predictions-on-terminal">Running train and predictions on terminal<a class="anchor-link" href="#Running-train-and-predictions-on-terminal"> </a></h3><div class="highlight"><pre><span></span><span class="ch">#!/bin/bash</span>
+<span class="nv">arch</span><span class="o">=</span><span class="s1">&#39;resnest50&#39;</span>
 <span class="nv">model_name</span><span class="o">=</span><span class="s1">&#39;model_n100&#39;</span>
 <span class="nv">sample_rate</span><span class="o">=</span><span class="m">32000</span>
 <span class="nv">n_mels</span><span class="o">=</span><span class="m">128</span>
@@ -241,20 +392,16 @@ nb_path: "nbs/kaggle_rfcx-species-audio-detection.ipynb"
 <span class="k">for</span> fold in <span class="m">0</span> <span class="m">1</span> <span class="m">2</span> <span class="m">3</span> <span class="m">4</span>
 <span class="k">do</span>
     <span class="nb">echo</span> <span class="s2">&quot;Training </span><span class="nv">$model</span><span class="s2"> for fold </span><span class="nv">$fold</span><span class="s2">&quot;</span>
-    kaggle_rainforest2021 --fold <span class="nv">$fold</span> --model_name <span class="nv">$model_name</span> --model <span class="nv">$arch</span> <span class="se">\</span>
+    kaggle_rainforest2021 --fold <span class="nv">$fold</span> --model_name <span class="nv">$model_name</span> --model_arch <span class="nv">$arch</span> <span class="se">\</span>
                           --sample_rate <span class="nv">$sample_rate</span> --n_mels <span class="nv">$n_mels</span> <span class="se">\</span>
                           --hop_length <span class="nv">$hop_length</span> --bs <span class="m">32</span> --head_ps <span class="m">0</span>.8 <span class="se">\</span>
                           --tile_width <span class="m">1024</span> --mixup <span class="nb">true</span> &gt;&gt; log.train
 <span class="k">done</span>
 
-<span class="k">for</span> tw in <span class="m">64</span> <span class="m">128</span> <span class="m">256</span>
-<span class="k">do</span>
-    <span class="nb">echo</span> <span class="s2">&quot;Generate predictions for </span><span class="nv">$model</span><span class="s2"> with tile_width of </span><span class="nv">$tw</span><span class="s2">&quot;</span>
-    kaggle_rainforest2021 --run_test <span class="nb">true</span> --model_name <span class="nv">$model_name</span> --model <span class="nv">$arch</span> <span class="se">\</span>
-                          --sample_rate <span class="nv">$sample_rate</span> --n_mels <span class="nv">$n_mels</span> <span class="se">\</span>
-                          --hop_length <span class="nv">$hop_length</span> --tile_width <span class="nv">$tw</span> <span class="se">\</span>
-                          --save_preds <span class="nb">true</span> &gt;&gt; log.predict
-<span class="k">done</span>
+<span class="nb">echo</span> <span class="s2">&quot;Generate predictions for </span><span class="nv">$model</span><span class="s2">&quot;</span>
+kaggle_rainforest2021 --run_test <span class="nb">true</span> --model_name <span class="nv">$model_name</span> --model_arch <span class="nv">$arch</span> <span class="se">\</span>
+                      --sample_rate <span class="nv">$sample_rate</span> --n_mels <span class="nv">$n_mels</span> <span class="se">\</span>
+                      --hop_length <span class="nv">$hop_length</span> --save_preds <span class="nb">true</span> &gt;&gt; log.predict
 </pre></div>
 
 </div>

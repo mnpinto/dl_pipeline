@@ -102,6 +102,8 @@ index = {"seed_everything": "00_core.ipynb",
          "MixUp": "01audio_util.ipynb",
          "LabelSED": "01audio_util.ipynb",
          "train": "kaggle_rfcx-species-audio-detection.ipynb",
+         "post_processing": "kaggle_rfcx-species-audio-detection.ipynb",
+         "ensemble": "kaggle_rfcx-species-audio-detection.ipynb",
          "test": "kaggle_rfcx-species-audio-detection.ipynb",
          "main": "kaggle_rfcx-species-audio-detection.ipynb"}
 
